@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GOM | Gestión Inteligente</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>GOM | Quantum Command</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Share+Tech+Mono&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --glass: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-            --glass-card: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01));
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-border-glow: rgba(0, 210, 255, 0.4);
-            --neon-blue: #00d2ff;
-            --neon-purple: #9d50bb;
-            --bg-dark: #020617;
-            --text-muted: #64748b;
+            --bg-deep: #030712;
+            --neon-cyan: #00f0ff;
+            --neon-magenta: #ff007f;
+            --neon-green: #39ff14;
+            --neon-orange: #ffaa00;
+            --panel-bg: rgba(6, 11, 25, 0.75);
+            --border-sci: rgba(0, 240, 255, 0.25);
+            --font-mono: 'Share Tech Mono', monospace;
         }
 
         * { 
@@ -26,11 +26,14 @@
         }
         
         body { 
-            background: radial-gradient(circle at 50% 0%, #0b1329 0%, var(--bg-dark) 80%); 
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.5) 50%),
+                radial-gradient(circle at 50% 30%, #0d1b3e 0%, var(--bg-deep) 70%);
+            background-size: 100% 4px, 100% 100%; /* Efecto líneas de monitor CRT antiguo */
             font-family: 'Poppins', sans-serif; 
-            color: #f8fafc; 
+            color: #e2e8f0; 
             min-height: 100vh; 
-            padding-bottom: 120px;
+            padding-bottom: 140px;
             overflow-x: hidden;
         }
 
@@ -40,255 +43,314 @@
             padding: 20px 16px; 
         }
 
-        /* Header */
+        /* --- CABINA HEADER --- */
         .header-card { 
-            background: var(--glass-card); 
-            backdrop-filter: blur(20px); 
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border); 
-            border-radius: 24px; 
+            background: var(--panel-bg); 
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 2px solid var(--border-sci);
+            border-radius: 16px; 
             padding: 16px 20px; 
             display: flex; 
             align-items: center; 
             justify-content: space-between; 
-            margin-bottom: 25px; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05); 
+            margin-bottom: 30px; 
+            position: relative;
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.15), inset 0 0 15px rgba(0, 240, 255, 0.1); 
+            clip-path: polygon(0 0, 93% 0, 100% 30%, 100% 100%, 0 100%); /* Esquina cortada Sci-Fi */
         }
         
+        /* Esquinas decorativas de interfaz de nave */
+        .header-card::before {
+            content: ''; position: absolute; top: -2px; left: -2px; width: 20px; height: 2px; background: var(--neon-cyan); box-shadow: 0 0 10px var(--neon-cyan);
+        }
+
         .profile { display: flex; align-items: center; gap: 14px; }
 
         .avatar-ring { 
-            width: 58px; height: 58px; border-radius: 50%; padding: 2px; 
-            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple)); 
-            box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
+            width: 60px; height: 60px; border-radius: 50%; padding: 3px; 
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta)); 
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+            position: relative;
         }
         
         .avatar-box { width: 100%; height: 100%; border-radius: 50%; overflow: hidden; background: #000; cursor: pointer; }
         #avatar-video { width: 100%; height: 100%; object-fit: cover; }
         
         .title-box h1 { 
-            font-family: 'Orbitron', sans-serif; font-size: 1.05rem; font-weight: 800; letter-spacing: 1px;
-            background: linear-gradient(to right, #fff, #cbd5e1, var(--neon-blue)); 
+            font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 900; letter-spacing: 2px;
+            background: linear-gradient(to right, #fff, var(--neon-cyan), var(--neon-magenta)); 
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
         }
         
-        .title-box p { font-size: 0.55rem; color: var(--neon-blue); font-family: 'Orbitron'; font-weight: 600; letter-spacing: 2px; margin-top: 1px; opacity: 0.8;}
+        .title-box p { 
+            font-size: 0.6rem; color: var(--neon-green); font-family: var(--font-mono); letter-spacing: 2px; margin-top: 2px;
+            display: flex; align-items: center; gap: 5px;
+        }
+        .title-box p::before { content: ''; width: 6px; height: 6px; background: var(--neon-green); border-radius: 50%; display: inline-block; animation: blink 0.8s infinite alternate; box-shadow: 0 0 8px var(--neon-green); }
 
-        /* --- DIAL CIRCULAR ESPACIAL (VIAJE EN EL TIEMPO) --- */
+        /* --- INTERFAZ DIAL COCKPIT (CONSOLA DE VIAJE) --- */
         .dial-container {
             position: relative;
             width: 100%;
-            height: 180px;
-            margin-bottom: 20px;
+            height: 220px;
+            margin-bottom: 25px;
             display: flex;
             justify-content: center;
             align-items: center;
-            perspective: 1000px;
+            perspective: 1200px;
             touch-action: pan-y;
             user-select: none;
         }
 
-        /* Anillos decorativos de interfaz cuántica */
+        /* Anillo holográfico brillante de energía */
         .quantum-ring {
             position: absolute;
             border-radius: 50%;
-            border: 1px dashed rgba(0, 210, 255, 0.15);
             pointer-events: none;
+            transition: all 0.5s;
         }
-        .ring-1 { width: 290px; height: 290px; animation: spin 40s linear infinite; }
-        .ring-2 { width: 330px; height: 330px; border: 1px double rgba(157, 80, 187, 0.1); animation: spin 60s linear infinite reverse; }
+        .ring-1 { 
+            width: 320px; height: 320px; 
+            border: 2px dashed var(--neon-cyan); 
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.2), inset 0 0 30px rgba(0, 240, 255, 0.1);
+            animation: spin 30s linear infinite; 
+            top: 60px;
+        }
+        .ring-2 { 
+            width: 360px; height: 360px; 
+            border: 1px solid var(--neon-magenta); 
+            opacity: 0.4;
+            animation: spin 50s linear infinite reverse; 
+            top: 40px;
+        }
 
         .dial-wheel {
             position: absolute;
-            width: 300px;
-            height: 300px;
-            top: 50px; /* Desplazado hacia abajo para simular una esfera gigante semioculta */
+            width: 340px;
+            height: 340px;
+            top: 70px;
             border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.03);
-            box-shadow: inset 0 0 30px rgba(0, 210, 255, 0.05), 0 0 30px rgba(0, 0, 0, 0.6);
+            background: rgba(10, 20, 40, 0.4);
+            border: 3px solid rgba(0, 240, 255, 0.2);
+            box-shadow: inset 0 0 50px rgba(0, 240, 255, 0.15), 0 10px 40px rgba(0,0,0,0.8);
             transform-style: preserve-3d;
-            transition: transform 0.5s cubic-bezier(0.1, 0.8, 0.2, 1);
+            transition: transform 0.6s cubic-bezier(0.15, 0.85, 0.3, 1);
             cursor: grab;
         }
         .dial-wheel:active { cursor: grabbing; }
 
         .dial-item {
             position: absolute;
-            top: 20px;
-            left: 100px;
+            top: 15px;
+            left: 120px;
             width: 100px;
             height: 100px;
-            transform-origin: center 130px;
+            transform-origin: center 155px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            text-align: center;
             backface-visibility: hidden;
-            transition: opacity 0.3s, transform 0.3s;
-            opacity: 0.3;
+            transition: all 0.4s cubic-bezier(0.15, 0.85, 0.3, 1);
+            opacity: 0.25;
+            filter: blur(1px);
         }
 
         .dial-item.center-active {
             opacity: 1;
-            transform: scale(1.15);
+            filter: blur(0);
+            transform: scale(1.25) translateY(-5px);
         }
 
+        /* Botones del timón esférico */
         .dial-icon-box {
-            width: 46px;
-            height: 46px;
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            background: #091124;
+            border: 2px solid #1e293b;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.1rem;
-            color: #94a3b8;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+            font-size: 1.2rem;
+            color: #64748b;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
             transition: all 0.3s;
+            position: relative;
         }
 
+        /* Asignación de colores vivos y destellos al activarse */
         .dial-item.center-active .dial-icon-box {
-            color: var(--neon-blue);
-            border-color: var(--neon-blue);
-            background: rgba(0, 210, 255, 0.1);
-            box-shadow: 0 0 15px rgba(0, 210, 255, 0.4), inset 0 0 8px rgba(0, 210, 255, 0.2);
+            color: #000;
+            background: var(--neon-cyan);
+            border-color: #fff;
+            box-shadow: 0 0 25px var(--neon-cyan), 0 0 10px #fff;
         }
+        
+        /* Variación de colores alternados para dar el look "Nave Colorida" */
+        .dial-item:nth-child(2n).center-active .dial-icon-box { background: var(--neon-magenta); color: #fff; box-shadow: 0 0 25px var(--neon-magenta); }
+        .dial-item:nth-child(3n).center-active .dial-icon-box { background: var(--neon-green); color: #000; box-shadow: 0 0 25px var(--neon-green); }
+        .dial-item:nth-child(4n).center-active .dial-icon-box { background: var(--neon-orange); color: #000; box-shadow: 0 0 25px var(--neon-orange); }
 
         .dial-item span {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.65rem;
-            font-weight: 700;
-            color: #64748b;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: #475569;
             margin-top: 8px;
-            max-width: 90px;
+            max-width: 95px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
             letter-spacing: 0.5px;
-            transition: color 0.3s;
+            text-transform: uppercase;
         }
 
         .dial-item.center-active span {
             color: #ffffff;
-            text-shadow: 0 0 8px rgba(255,255,255,0.3);
+            text-shadow: 0 0 8px var(--neon-cyan);
         }
 
-        /* Indicador Holográfico Superior */
+        /* Visor de Estado Central (HUD) */
         .dial-indicator {
             position: absolute;
-            top: -5px;
+            top: 0px;
             display: flex;
             flex-direction: column;
             align-items: center;
             z-index: 10;
             pointer-events: none;
         }
-        .dial-indicator i { font-size: 0.7rem; color: var(--neon-blue); animation: blink 1s infinite alternate; }
+        .dial-indicator .aim-laser {
+            width: 2px; height: 15px; background: var(--neon-magenta); box-shadow: 0 0 8px var(--neon-magenta); margin-bottom: 5px;
+        }
         .dial-indicator .current-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 800;
-            letter-spacing: 1.5px;
+            font-size: 0.85rem;
+            font-weight: 900;
+            letter-spacing: 2px;
             color: #fff;
-            margin-top: 4px;
-            text-shadow: 0 0 10px var(--neon-blue);
-            background: rgba(2, 6, 23, 0.6);
-            padding: 2px 12px;
-            border-radius: 10px;
-            border: 1px solid rgba(0, 210, 255, 0.2);
-            backdrop-filter: blur(5px);
+            background: #060b19;
+            padding: 4px 16px;
+            border-radius: 4px;
+            border: 2px solid var(--neon-cyan);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
         }
 
-        /* --- REJILLA DE ENLACES (CONTENIDO FILTRADO) --- */
+        /* --- MÓDULOS DE COMANDO (TARJETAS DE BOTONES DE NAVE) --- */
         .category-content-view {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
-            transition: opacity 0.3s ease;
+            gap: 16px;
+            transition: opacity 0.2s ease;
         }
 
+        /* El botón / tarjeta estilo consola retro-futurista */
         .link-card { 
-            background: rgba(255, 255, 255, 0.02); 
-            border-radius: 18px; 
-            padding: 20px 14px; 
+            background: linear-gradient(145deg, #0b1528, #040814); 
+            border-radius: 4px; /* Bordes rectos y técnicos */
+            padding: 22px 14px; 
             text-align: center; 
             position: relative; 
-            border: 1px solid var(--glass-border); 
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); 
+            border: 1px solid rgba(0, 240, 255, 0.15);
+            border-left: 4px solid var(--neon-cyan); /* Franja de activación lateral */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4), inset 0 0 10px rgba(0, 240, 255, 0.02);
+            transition: all 0.25s cubic-bezier(0.15, 0.85, 0.3, 1); 
+            overflow: hidden;
         }
         
+        /* Pequeña luz de estatus arriba a la izquierda (Típica de naves espaciales) */
+        .link-card::after {
+            content: ''; position: absolute; top: 6px; left: 6px; width: 5px; height: 5px; 
+            background: var(--neon-green); border-radius: 50%; box-shadow: 0 0 6px var(--neon-green);
+        }
+        
+        /* Variar colores de tarjetas de forma aleatoria para hacer el panel colorido */
+        .link-card:nth-child(2n) { border-left-color: var(--neon-magenta); }
+        .link-card:nth-child(2n)::after { background: var(--neon-cyan); box-shadow: 0 0 6px var(--neon-cyan); }
+        .link-card:nth-child(3n) { border-left-color: var(--neon-orange); }
+        .link-card:nth-child(3n)::after { background: var(--neon-orange); box-shadow: 0 0 6px var(--neon-orange); }
+
         .link-card:hover {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: var(--glass-border-glow);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 210, 255, 0.1);
+            background: #0f203c;
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.25), inset 0 0 10px rgba(0, 240, 255, 0.1);
+            transform: scale(1.03);
         }
         
-        .link-card:active { transform: scale(0.97); }
+        .link-card:active { transform: scale(0.97); filter: brightness(1.2); }
         .link-card a { text-decoration: none; color: white; display: block; }
         
         .link-card i.main-icon { 
-            font-size: 1.6rem; margin-bottom: 10px; color: var(--neon-blue); 
+            font-size: 1.8rem; margin-bottom: 12px; color: #fff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.4);
             transition: transform 0.3s;
         }
-        .link-card:hover i.main-icon { transform: scale(1.08); text-shadow: 0 0 12px rgba(0, 210, 255, 0.5); }
+        .link-card:hover i.main-icon { transform: translateY(-2px) scale(1.1); color: var(--neon-cyan); text-shadow: 0 0 15px var(--neon-cyan); }
         
         .link-card span { 
-            font-size: 0.78rem; color: #e2e8f0; display: block; line-height: 1.3;
-            overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+            font-family: var(--font-mono); font-size: 0.85rem; font-weight: bold; color: #94a3b8; display: block; 
+            letter-spacing: 0.5px; text-transform: uppercase; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
         }
+        .link-card:hover span { color: #fff; }
 
-        /* Acciones Tarjeta */
-        .card-actions { position: absolute; top: 6px; right: 6px; display: flex; opacity: 0; transition: opacity 0.2s; z-index: 5;}
+        /* Botón de Purga / Destrucción (Estructura de emergencia) */
+        .card-actions { position: absolute; top: 5px; right: 5px; opacity: 0; transition: opacity 0.2s; z-index: 5;}
         .link-card:hover .card-actions { opacity: 1; }
         .action-btn { 
-            background: rgba(15, 23, 42, 0.9); border: 1px solid var(--glass-border); 
-            color: #94a3b8; width: 26px; height: 26px; border-radius: 8px; cursor: pointer; 
-            font-size: 0.7rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+            background: rgba(239, 68, 68, 0.15); border: 1px solid #ef4444; 
+            color: #ef4444; width: 24px; height: 24px; border-radius: 4px; cursor: pointer; 
+            font-size: 0.65rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s;
         }
-        .btn-del:hover { background: #ef4444; color: white; border-color: #ef4444; }
+        .action-btn:hover { background: #ef4444; color: white; box-shadow: 0 0 10px #ef4444; }
 
-        /* Floating Button & Modal */
+        /* --- INTERRUPTOR FLOTANTE PRINCIPAL (FAB) --- */
         .fab { 
-            position: fixed; bottom: 30px; right: 30px; width: 56px; height: 56px; 
-            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple)); 
+            position: fixed; bottom: 35px; right: 35px; width: 60px; height: 60px; 
+            background: #000; border: 2px solid var(--neon-cyan);
             border-radius: 50%; display: flex; align-items: center; justify-content: center; 
-            border: none; color: white; font-size: 1.3rem; cursor: pointer; z-index: 1000; 
-            box-shadow: 0 10px 25px rgba(0,210,255,0.3); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            color: var(--neon-cyan); font-size: 1.4rem; cursor: pointer; z-index: 1000; 
+            box-shadow: 0 0 20px rgba(0,240,255,0.4), inset 0 0 10px rgba(0,240,255,0.2); 
+            transition: all 0.3s cubic-bezier(0.15, 0.85, 0.3, 1);
         }
-        .fab:hover { transform: scale(1.08) rotate(90deg); box-shadow: 0 12px 30px rgba(0,210,255,0.45); }
+        .fab:hover { 
+            background: var(--neon-cyan); color: #000;
+            box-shadow: 0 0 30px var(--neon-cyan); transform: scale(1.1) rotate(180deg);
+        }
 
+        /* --- MODAL DE MATRIZ --- */
         .modal { 
-            display: none; position: fixed; inset: 0; background: rgba(2, 6, 23, 0.85); 
+            display: none; position: fixed; inset: 0; background: rgba(2, 4, 10, 0.9); 
             backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); z-index: 2000; 
             justify-content: center; align-items: center; padding: 20px; 
         }
         .modal-content { 
-            background: #080d1a; width: 100%; max-width: 400px; padding: 30px; border-radius: 24px; 
-            border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 25px 50px rgba(0,0,0,0.6); 
+            background: #050b14; width: 100%; max-width: 400px; padding: 30px; border-radius: 12px; 
+            border: 2px solid var(--neon-magenta); box-shadow: 0 0 35px rgba(255, 0, 127, 0.3); 
+            position: relative;
         }
         
         input, select { 
-            width: 100%; padding: 14px; margin-bottom: 12px; background: #111726; 
-            border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; color: white; 
-            font-family: 'Poppins'; font-size: 0.85rem; outline: none; transition: all 0.3s;
+            width: 100%; padding: 14px; margin-bottom: 14px; background: #0c1322; 
+            border: 1px solid rgba(0, 240, 255, 0.2); border-radius: 6px; color: white; 
+            font-family: var(--font-mono); font-size: 0.9rem; outline: none; transition: all 0.3s;
         }
-        input:focus, select:focus { border-color: var(--neon-blue); background: #151d30; box-shadow: 0 0 12px rgba(0, 210, 255, 0.1); }
-        select option { background: #111726; color: #fff; }
+        input:focus, select:focus { border-color: var(--neon-magenta); background: #121c33; box-shadow: 0 0 12px rgba(255, 0, 127, 0.2); }
+        select option { background: #050b14; color: #fff; }
 
         .save-btn { 
-            background: linear-gradient(90deg, var(--neon-blue), #00b4db); color: #020617; 
-            font-weight: 700; border: none; padding: 15px; border-radius: 12px; width: 100%; 
-            cursor: pointer; font-family: 'Orbitron'; font-size: 0.8rem; letter-spacing: 1px; transition: all 0.3s;
+            background: linear-gradient(90deg, var(--neon-magenta), var(--neon-orange)); color: white; 
+            font-weight: 900; border: none; padding: 16px; border-radius: 6px; width: 100%; 
+            cursor: pointer; font-family: 'Orbitron'; font-size: 0.85rem; letter-spacing: 1.5px; transition: all 0.3s;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5); box-shadow: 0 0 15px rgba(255, 0, 127, 0.3);
         }
-        .save-btn:hover { box-shadow: 0 5px 15px rgba(0, 210, 255, 0.3); }
+        .save-btn:hover { box-shadow: 0 0 25px rgba(255, 0, 127, 0.6); filter: brightness(1.1); }
 
-        /* Animaciones */
+        /* Animaciones del Núcleo */
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes blink { from { opacity: 0.3; } to { opacity: 1; } }
-        @keyframes pulse { from { transform: scale(1); opacity: 0.8; } to { transform: scale(1.05); opacity: 1; } }
+        @keyframes blink { from { opacity: 0.2; } to { opacity: 1; } }
     </style>
 </head>
 <body>
@@ -305,10 +367,10 @@
             </div>
             <div class="title-box">
                 <h1>GOM SCIENTIFIC</h1>
-                <p>TIMELINE SYSTEM CONNECTED</p>
+                <p>CORE_MATRIX_ACTIVE</p>
             </div>
         </div>
-        <i class="fas fa-satellite-dish" style="color: var(--neon-blue); font-size: 0.9rem; animation: pulse 1.5s infinite alternate;"></i>
+        <i class="fas fa-satellite-dish" style="color: var(--neon-cyan); font-size: 1.1rem; text-shadow: 0 0 10px var(--neon-cyan); animation: blink 1s infinite alternate;"></i>
     </header>
 
     <div class="dial-container" id="dial-zone">
@@ -316,29 +378,28 @@
         <div class="quantum-ring ring-2"></div>
         
         <div class="dial-indicator">
-            <i class="fas fa-caret-down"></i>
-            <div class="current-title" id="active-cat-label">---</div>
+            <div class="aim-laser"></div>
+            <div class="current-title" id="active-cat-label">SCANNING...</div>
         </div>
 
-        <div class="dial-wheel" id="wheel">
-            </div>
+        <div class="dial-wheel" id="wheel"></div>
     </div>
 
-    <div id="loading" style="text-align: center; padding: 20px; color: var(--neon-blue); font-family: 'Orbitron'; font-size: 0.7rem; letter-spacing: 1px;">
-        <i class="fas fa-sync fa-spin"></i> ESCANEANDO MATRIZ DE EXCEL...
+    <div id="loading" style="text-align: center; padding: 30px; color: var(--neon-magenta); font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 2px;">
+        <i class="fas fa-terminal fa-pulse" style="margin-right: 6px;"></i> ENCRIPTANDO ENLACES TÁCTICOS...
     </div>
     
     <div class="category-content-view" id="cards-view"></div>
 </div>
 
-<button class="fab" onclick="toggleModal()"><i class="fas fa-plus"></i></button>
+<button class="fab" onclick="toggleModal()"><i class="fas fa-sliders"></i></button>
 
 <div id="adminModal" class="modal">
     <div class="modal-content">
-        <h2 style="font-family:'Orbitron'; font-size:0.9rem; font-weight:700; text-align:center; margin-bottom:20px; color:var(--neon-blue);">NUEVO RECURSO INTERDIMENSIONAL</h2>
-        <input type="text" id="siteName" placeholder="Nombre del sitio">
-        <input type="text" id="siteUrl" placeholder="URL (ej: www.google.com)">
-        <input type="text" id="siteCat" placeholder="Categoría (ej: MIPES, Salud...)">
+        <h2 style="font-family:'Orbitron'; font-size:0.95rem; font-weight:900; letter-spacing:1px; text-align:center; margin-bottom:20px; color:var(--neon-magenta); text-shadow: 0 0 10px rgba(255,0,127,0.3);">INYECTAR VECTOR DE ACCESO</h2>
+        <input type="text" id="siteName" placeholder="IDENTIFICADOR (NOMBRE)">
+        <input type="text" id="siteUrl" placeholder="DIRECCIÓN RECURSO (URL)">
+        <input type="text" id="siteCat" placeholder="MATRIZ CONTENEDORA (CATEGORÍA)">
         
         <select id="siteIcon">
             <option value="fa-users">👥 Grupos</option>
@@ -362,8 +423,8 @@
             <option value="fa-chart-pie">📈 Estadísticas</option>
         </select>
 
-        <button id="btnSave" class="save-btn" onclick="saveToExcel()">SINCRONIZAR AHORA</button>
-        <button onclick="toggleModal()" style="background:transparent; color:var(--text-muted); width:100%; margin-top:12px; border:none; cursor:pointer; font-size:0.7rem;">CERRAR ARCHIVO</button>
+        <button id="btnSave" class="save-btn" onclick="saveToExcel()">SINCRONIZAR TERMINAL</button>
+        <button onclick="toggleModal()" style="background:transparent; color:#64748b; width:100%; margin-top:14px; border:none; cursor:pointer; font-family: var(--font-mono); font-size:0.75rem; letter-spacing: 1px;">ABORTAR OPERACIÓN</button>
     </div>
 </div>
 
@@ -371,7 +432,6 @@
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwdIVWOn-VY6mhSrpIA7SolVLZ-1CjaRAWM8rkWsjOsmiDt1I6b8n6u0slz4bz7wdYcKg/exec";
     const video = document.getElementById('avatar-video');
     
-    // Almacén global de datos de la API
     let globalData = [];
     let categories = [];
     let currentAngle = 0;
@@ -387,31 +447,26 @@
             globalData = await response.json();
             loading.style.display = 'none';
 
-            // Obtener categorías únicas
             categories = [...new Set(globalData.map(p => p.cat))];
             
             if(categories.length > 0) {
                 buildWheel();
-                updateSelection();
+                rotateToCategory(0);
             }
-        } catch (e) { loading.innerHTML = "❌ ERROR DE CONEXIÓN CUÁNTICA"; }
+        } catch (e) { loading.innerHTML = "❌ DEFECTO EN ENLACE SATELITAL"; }
     }
 
-    // Construcción tridimensional y angular del Dial Circular
     function buildWheel() {
         const wheel = document.getElementById('wheel');
         wheel.innerHTML = '';
-        
         const angleStep = 360 / categories.length;
 
         categories.forEach((cat, index) => {
-            // Buscamos un icono representativo de los elementos de esta categoría para el menú circular
             const sampleItem = globalData.find(p => p.cat === cat);
             const iconClass = sampleItem ? sampleItem.icon : 'fa-folder';
 
             const item = document.createElement('div');
             item.className = 'dial-item';
-            // Cada item se desfasa angularmente y se empuja hacia afuera en el plano del círculo
             item.style.transform = `rotate(${index * angleStep}deg)`;
             item.setAttribute('data-index', index);
             
@@ -422,16 +477,11 @@
                 <span>${cat}</span>
             `;
             
-            // Permitir clics directos sobre el icono para mover la rueda automáticamente
-            item.onclick = () => {
-                rotateToCategory(index);
-            };
-
+            item.onclick = () => { rotateToCategory(index); };
             wheel.appendChild(item);
         });
     }
 
-    // Centra y rota la rueda a un índice específico
     function rotateToCategory(index) {
         const angleStep = 360 / categories.length;
         activeIndex = index;
@@ -443,7 +493,6 @@
         updateSelection();
     }
 
-    // Actualiza los estados visuales del texto central superior e inyecta las tarjetas filtradas
     function updateSelection() {
         const items = document.querySelectorAll('.dial-item');
         items.forEach(item => {
@@ -455,11 +504,12 @@
         });
 
         const activeCat = categories[activeIndex];
-        document.getElementById('active-cat-label').innerText = activeCat.toUpperCase();
+        if(activeCat) {
+            document.getElementById('active-cat-label').innerText = activeCat.toUpperCase();
+        }
 
-        // Renderizar las tarjetas correspondientes a la categoría con efecto electromagnético sutil
         const cardsView = document.getElementById('cards-view');
-        cardsView.style.opacity = '0';
+        cardsView.style.opacity = '0.2'; // Pequeño parpadeo estilo monitor
         
         setTimeout(() => {
             cardsView.innerHTML = '';
@@ -470,8 +520,8 @@
                 card.className = 'link-card';
                 card.innerHTML = `
                     <div class="card-actions">
-                        <button class="action-btn btn-del" onclick="event.stopPropagation(); deletePage('${page.name}')">
-                            <i class="fas fa-trash-alt"></i>
+                        <button class="action-btn" onclick="event.stopPropagation(); deletePage('${page.name}')">
+                            <i class="fas fa-skull"></i>
                         </button>
                     </div>
                     <a href="${page.url}" target="_blank">
@@ -482,56 +532,46 @@
                 cardsView.appendChild(card);
             });
             cardsView.style.opacity = '1';
-        }, 150);
+        }, 100);
     }
 
-    /* --- LÓGICA DE CONTROL GESTUAL (TOUCH MÓVIL Y RATÓN PC) --- */
+    /* --- GESTIÓN TOUCH / DRAG (SÚPER MÓVIL) --- */
     const dialZone = document.getElementById('dial-zone');
     let isDragging = false;
     let startX = 0;
     let baseAngle = 0;
 
-    // Manejador del inicio del arrastre
     function dragStart(e) {
         isDragging = true;
         startX = e.touches ? e.touches[0].clientX : e.clientX;
         baseAngle = currentAngle;
-        document.getElementById('wheel').style.transition = 'none'; // Desactivar transición mientras arrastras
+        document.getElementById('wheel').style.transition = 'none';
     }
 
-    // Manejador del movimiento
     function dragMove(e) {
         if (!isDragging) return;
         const currentX = e.touches ? e.touches[0].clientX : e.clientX;
         const diffX = currentX - startX;
+        const deltaAngle = diffX * 0.35; // Suavizado de arrastre
         
-        // Convertimos el arrastre lineal en grados de rotación (sensibilidad ajustable)
-        const sensitivity = 0.4; 
-        const deltaAngle = diffX * sensitivity;
-        
-        const wheel = document.getElementById('wheel');
-        wheel.style.transform = `rotate(${baseAngle + deltaAngle}deg)`;
         currentAngle = baseAngle + deltaAngle;
+        document.getElementById('wheel').style.transform = `rotate(${currentAngle}deg)`;
     }
 
-    // Manejador del fin del arrastre con cálculo de aproximación (Snap-to-item)
     function dragEnd() {
         if (!isDragging) return;
         isDragging = false;
         
         const wheel = document.getElementById('wheel');
-        wheel.style.transition = 'transform 0.4s cubic-bezier(0.1, 0.8, 0.2, 1)';
+        wheel.style.transition = 'transform 0.5s cubic-bezier(0.15, 0.85, 0.3, 1)';
 
         const angleStep = 360 / categories.length;
-        
-        // Calcular cuál es la categoría más cercana en base al ángulo final detenido
         let estimatedIndex = Math.round(-currentAngle / angleStep) % categories.length;
         if (estimatedIndex < 0) estimatedIndex += categories.length;
         
         rotateToCategory(estimatedIndex);
     }
 
-    // Registro de eventos para PC y Móviles
     dialZone.addEventListener('mousedown', dragStart);
     window.addEventListener('mousemove', dragMove);
     window.addEventListener('mouseup', dragEnd);
@@ -540,8 +580,7 @@
     window.addEventListener('touchmove', dragMove, { passive: false });
     window.addEventListener('touchend', dragEnd);
 
-
-    /* --- OPERACIONES API REST EXCEL --- */
+    /* --- OPERACIONES EXCEL --- */
     async function saveToExcel() {
         const name = document.getElementById('siteName').value;
         let url = document.getElementById('siteUrl').value;
@@ -552,18 +591,18 @@
         if (name && url && cat) {
             if (!url.startsWith('http')) url = 'https://' + url;
             btn.disabled = true;
-            btn.innerHTML = "PROCESANDO MATRIZ...";
+            btn.innerHTML = "SINC_MATRIX_ON_RUN...";
             const finalUrl = `${SCRIPT_URL}?name=${encodeURIComponent(name)}&url=${encodeURIComponent(url)}&cat=${encodeURIComponent(cat)}&icon=${encodeURIComponent(icon)}`;
             await fetch(finalUrl, { mode: 'no-cors' });
-            alert("✅ Línea temporal actualizada en la Nube.");
+            alert("🚀 Enlace sincronizado en la memoria central.");
             location.reload();
         } else {
-            alert("Completa todos los campos obligatorios.");
+            alert("Error: Datos incompletos.");
         }
     }
 
     async function deletePage(name) {
-        if (confirm(`¿Purgar permanentemente "${name}" del registro?`)) {
+        if (confirm(`¿Eliminar sector de datos "${name}"?`)) {
             await fetch(`${SCRIPT_URL}?action=delete&name=${encodeURIComponent(name)}`, { mode: 'no-cors' });
             location.reload();
         }
